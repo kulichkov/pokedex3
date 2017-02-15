@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pokemon.ttf">
+            <string>PokemonSolidNormal</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -23,9 +28,32 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbS-qx-rGB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pokedex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro4-tT-dLW">
+                                        <rect key="frame" x="101" y="20" width="172" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="32"/>
+                                        <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Set-UI-p2e">
+                                        <rect key="frame" x="333" y="24" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="37" id="CoW-Ok-S5Z"/>
+                                            <constraint firstAttribute="height" constant="37" id="tzg-bj-ymc"/>
+                                        </constraints>
+                                        <state key="normal" image="music.png"/>
+                                        <connections>
+                                            <action selector="musicButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tPa-5p-wTj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.25458003252940764" blue="0.16232764783651721" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="46y-fV-PN6"/>
+                                    <constraint firstAttribute="bottom" secondItem="Set-UI-p2e" secondAttribute="bottom" constant="4" id="5wj-HQ-2Vy"/>
+                                    <constraint firstAttribute="width" constant="375" id="6pj-cF-5QI"/>
+                                    <constraint firstAttribute="trailing" secondItem="Set-UI-p2e" secondAttribute="trailing" constant="5" id="RNi-nH-sKC"/>
                                 </constraints>
                             </view>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ttx-D5-YNh">
@@ -40,6 +68,7 @@
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-Gq-Zmr">
                                 <rect key="frame" x="20" y="129" width="335" height="518"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CTk-Re-dWv">
                                     <size key="itemSize" width="105" height="105"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -47,7 +76,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Pokemon Cell" id="pme-SG-MC8">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Pokemon Cell" id="pme-SG-MC8" customClass="PokemonCollectionViewCell" customModule="Pokedex3" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -79,6 +108,10 @@
                                             <constraint firstItem="aVN-nz-S0V" firstAttribute="leading" secondItem="pme-SG-MC8" secondAttribute="leading" id="eHZ-vx-g9H"/>
                                             <constraint firstAttribute="trailing" secondItem="0d0-Qw-tlJ" secondAttribute="trailing" id="rZf-zG-39q"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="aVN-nz-S0V" id="hc3-Gs-Icv"/>
+                                            <outlet property="thumbImageView" destination="0d0-Qw-tlJ" id="g9e-um-jCv"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -86,6 +119,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Te8-Gq-Zmr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="0IV-DL-Ffj"/>
+                            <constraint firstItem="ttx-D5-YNh" firstAttribute="top" secondItem="cbS-qx-rGB" secondAttribute="bottom" id="Bhx-y5-shv"/>
                             <constraint firstItem="cbS-qx-rGB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Hih-7o-7xc"/>
                             <constraint firstItem="ttx-D5-YNh" firstAttribute="top" secondItem="cbS-qx-rGB" secondAttribute="bottom" id="MYE-qm-ydi"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Te8-Gq-Zmr" secondAttribute="bottom" constant="20" id="S90-4P-Ixx"/>
@@ -101,6 +135,9 @@
                             <constraint firstAttribute="trailing" secondItem="cbS-qx-rGB" secondAttribute="trailing" id="zWq-bQ-vHz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Te8-Gq-Zmr" id="4dh-GQ-FMs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,5 +147,6 @@
     <resources>
         <image name="1" width="120" height="120"/>
         <image name="bg" width="1920" height="1200"/>
+        <image name="music.png" width="100" height="100"/>
     </resources>
 </document>
