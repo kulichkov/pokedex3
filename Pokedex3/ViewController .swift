@@ -9,9 +9,17 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+class ViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    var pokemonsUnfiltered: [Pokemon]!
+    var pokemonsFiltered: [Pokemon]!
     var pokemons: [Pokemon]!
+    var searchMode = false {
+        didSet {
+            pokemons = searchMode ? pokemonsFiltered : pokemonsUnfiltered
+        }
+    }
     var musicPlayer: AVAudioPlayer!
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -51,6 +59,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
 
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+
     func parsePokemonCSV() -> [Pokemon] {
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")
         var parsedPokemons = [Pokemon]()
@@ -68,13 +80,46 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return parsedPokemons.sorted{$0.name < $1.name}
     }
 
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        pokemonsFiltered = pokemonsUnfiltered.filter { $0.name.range(of: searchText) != nil }
+        if searchBar.text == nil || searchBar.text == "" {
+            searchMode = false
+        } else {
+            searchMode = true
+        }
+        collectionView.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.endEditing(true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        pokemons = parsePokemonCSV()
+        pokemonsUnfiltered = parsePokemonCSV()
+        searchBar.delegate = self
+        searchBar.returnKeyType = .done
+        searchMode = false
         collectionView.delegate = self
         collectionView.dataSource = self
         initMusicPlayer()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,5 +137,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
 
+}
+
+extension UICollectionView {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let delegateController = delegate as? UIViewController
+        delegateController?.touchesBegan(touches, with: event)
+    }
 }
 

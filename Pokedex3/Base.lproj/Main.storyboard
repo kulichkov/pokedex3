@@ -29,9 +29,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbS-qx-rGB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pokedex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro4-tT-dLW">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokedex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro4-tT-dLW">
                                         <rect key="frame" x="101" y="20" width="172" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="172" id="Fln-90-5sn"/>
+                                            <constraint firstAttribute="height" constant="45" id="f0h-f2-vVz"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="32"/>
                                         <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -54,9 +57,11 @@
                                     <constraint firstAttribute="bottom" secondItem="Set-UI-p2e" secondAttribute="bottom" constant="4" id="5wj-HQ-2Vy"/>
                                     <constraint firstAttribute="width" constant="375" id="6pj-cF-5QI"/>
                                     <constraint firstAttribute="trailing" secondItem="Set-UI-p2e" secondAttribute="trailing" constant="5" id="RNi-nH-sKC"/>
+                                    <constraint firstAttribute="bottom" secondItem="ro4-tT-dLW" secondAttribute="bottom" id="iNJ-0z-45u"/>
+                                    <constraint firstItem="ro4-tT-dLW" firstAttribute="centerX" secondItem="cbS-qx-rGB" secondAttribute="centerX" id="vdn-tp-yJR"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ttx-D5-YNh">
+                            <searchBar contentMode="redraw" placeholder="Search Pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="ttx-D5-YNh">
                                 <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="LPk-uq-xxf"/>
@@ -66,7 +71,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="6AM-Nt-tMx">
                                 <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-Gq-Zmr">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-Gq-Zmr">
                                 <rect key="frame" x="20" y="129" width="335" height="518"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CTk-Re-dWv">
@@ -137,6 +142,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Te8-Gq-Zmr" id="4dh-GQ-FMs"/>
+                        <outlet property="searchBar" destination="ttx-D5-YNh" id="4C7-pT-N1U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
