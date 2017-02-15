@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pokedex3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Pokedex3" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -70,7 +70,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="6AM-Nt-tMx">
                                 <rect key="frame" x="0.0" y="109" width="375" height="558"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-Gq-Zmr">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-Gq-Zmr">
                                 <rect key="frame" x="20" y="129" width="335" height="518"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CTk-Re-dWv">
@@ -142,17 +142,17 @@
                     <connections>
                         <outlet property="collectionView" destination="Te8-Gq-Zmr" id="4dh-GQ-FMs"/>
                         <outlet property="searchBar" destination="ttx-D5-YNh" id="4C7-pT-N1U"/>
-                        <segue destination="Nuj-CF-vTf" kind="show" identifier="ShowDetails" id="TA0-Hv-blr"/>
+                        <segue destination="Nuj-CF-vTf" kind="show" identifier="Show Details" id="TA0-Hv-blr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="297" y="130"/>
         </scene>
-        <!--View Controller-->
+        <!--Details View Controller-->
         <scene sceneID="Jt1-a4-zVS">
             <objects>
-                <viewController id="Nuj-CF-vTf" sceneMemberID="viewController">
+                <viewController id="Nuj-CF-vTf" customClass="DetailsViewController" customModule="Pokedex3" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GLK-Kt-J3T"/>
                         <viewControllerLayoutGuide type="bottom" id="JS0-6U-2S4"/>
@@ -180,6 +180,9 @@
                                             <constraint firstAttribute="width" constant="37" id="mTB-O4-B6S"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="back"/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="Nuj-CF-vTf" eventType="touchUpInside" id="a1c-Wf-EHF"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.2545800325" blue="0.1623276478" alpha="1" colorSpace="calibratedRGB"/>
@@ -192,14 +195,25 @@
                                     <constraint firstAttribute="trailing" secondItem="els-oe-FVJ" secondAttribute="trailing" constant="47" id="vIH-l5-AiK"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-kz-Vpe">
+                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                                <color key="backgroundColor" red="0.37082159009999999" green="0.51309039089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cPt-kz-Vpe" firstAttribute="top" secondItem="ev0-3p-dbT" secondAttribute="bottom" id="2gg-zh-p8g"/>
+                            <constraint firstItem="cPt-kz-Vpe" firstAttribute="leading" secondItem="CeY-dU-VA4" secondAttribute="leading" id="BUG-FR-cKX"/>
+                            <constraint firstAttribute="trailing" secondItem="cPt-kz-Vpe" secondAttribute="trailing" id="CXp-ET-9yg"/>
+                            <constraint firstItem="JS0-6U-2S4" firstAttribute="top" secondItem="cPt-kz-Vpe" secondAttribute="bottom" id="QU6-xb-9zN"/>
                             <constraint firstAttribute="trailing" secondItem="ev0-3p-dbT" secondAttribute="trailing" id="X3I-2M-eeN"/>
                             <constraint firstItem="ev0-3p-dbT" firstAttribute="top" secondItem="CeY-dU-VA4" secondAttribute="top" id="g1i-fG-ekt"/>
                             <constraint firstItem="ev0-3p-dbT" firstAttribute="leading" secondItem="CeY-dU-VA4" secondAttribute="leading" id="uFM-6h-Epo"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="name" destination="els-oe-FVJ" id="owL-jK-JN2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbB-k6-5Fd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  Pokedex3
 //
 //  Created by Mikhail Kulichkov on 14/02/17.
@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     var pokemonsUnfiltered: [Pokemon]!
@@ -39,7 +39,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // set up the action to vie selected pokemon
+        performSegue(withIdentifier: "Show Details", sender: pokemons[indexPath.row])
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,10 +107,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDe
         searchBar.endEditing(true)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        searchBar.endEditing(true)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         pokemonsUnfiltered = parsePokemonCSV()
@@ -119,7 +115,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDe
         searchMode = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        initMusicPlayer()
+        //initMusicPlayer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,13 +133,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UIScrollViewDe
         }
     }
 
-}
-
-extension UICollectionView {
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        let delegateController = delegate as? UIViewController
-        delegateController?.touchesBegan(touches, with: event)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Show Details":
+                let destination = segue.destination as! DetailsViewController
+                destination.pokemon = sender as! Pokemon
+            default:
+                break
+            }
+        }
     }
 }
-
