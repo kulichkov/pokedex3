@@ -115,7 +115,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         searchMode = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        //initMusicPlayer()
+        initMusicPlayer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -138,7 +138,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             switch identifier {
             case "Show Details":
                 let destination = segue.destination as! DetailsViewController
-                destination.pokemon = sender as! Pokemon
+                destination.pokemon = sender as? Pokemon
             default:
                 break
             }
